@@ -1,3 +1,5 @@
 packages/
 iTunesAPI/bin/
 iTunesAPI/obj/
+iTunesAPI.Tests/bin/
+iTunesAPI.Tests/obj/
