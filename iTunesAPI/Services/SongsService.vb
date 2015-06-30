@@ -1,4 +1,6 @@
 ﻿Imports Newtonsoft.Json.Linq
+Imports System.Diagnostics.Contracts
+
 ''' <summary>
 ''' Service for songs search
 ''' </summary>
@@ -18,6 +20,8 @@ Public Class SongsService
     ''' <returns>songs list that fits the artist name</returns>
     ''' <remarks></remarks>
     Public Function GetSongs(ByVal artistName As String) As List(Of String) Implements ISongsService.GetSongs
+        Contract.Requires(Not String.IsNullOrEmpty(artistName), "artistName is nothing or empty.")
+
         Dim webClientService As IWebClientService = ServiceLocator.GetService(Of IWebClientService)()
         Dim retVal As New List(Of String)
         Dim url As String = String.Format("https://itunes.apple.com/search?term={0}", artistName)
@@ -48,4 +52,12 @@ Public Class SongsService
     Public Function GetAverageTime() As String Implements ISongsService.GetAverageTime
         Return _averageTime
     End Function
+
+    'Function foo(x As Int32, y As Int32) As Double
+    '    If y = -1 Then
+    '        Throw New Exception("a")
+    '    Else
+    '        Return x / (y + 1)
+    '    End If
+    'End Function
 End Class
