@@ -24,6 +24,6 @@ Class MainWindow
         For Each song As String In songsList
             Songs.Add(song)
         Next
-        lblAveragePrice.Content = _songsService.GetAverageTime
+        lblAveragePrice.Content = DirectCast(_songsService, SongsService).AverageTime
     End Sub
 End Class

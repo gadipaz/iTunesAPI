@@ -17,7 +17,7 @@ Public Class ServiceLocator
         services = New Dictionary(Of Object, Object)()
 
         ' fill the map
-        services.Add(GetType(ISongsService), New SongsServiceLive())
+        services.Add(GetType(ISongsService), New SongsService())
         services.Add(GetType(IWebClientService), New WebClientService())
     End Sub
     ''' <summary>
@@ -33,6 +33,12 @@ Public Class ServiceLocator
             Throw New ApplicationException("The requested service is not registered")
         End Try
     End Function
+    ''' <summary>
+    ''' Replace service for mocking
+    ''' </summary>
+    ''' <typeparam name="T">Service interface</typeparam>
+    ''' <param name="newService">Mocking service</param>
+    ''' <remarks></remarks>
     Public Shared Sub ReplaceService(Of T)(newService As T)
         services.Remove(GetType(T))
         services.Add(GetType(T), newService)
